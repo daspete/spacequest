@@ -1,7 +1,10 @@
 data
 .env
-ssl/*
+ssl/certbot/etc
+ssl/certbot/var
+ssl/certbot/www
 !ssl/certbot/etc/.gitkeep
 !ssl/certbot/var/.gitkeep
 !ssl/certbot/www/.gitkeep
+ssl/dhparam
 !ssl/dhparam/.gitkeep

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/gateway/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "plugins": [
+      {
+        "name": "@nestjs/graphql",
+        "options": {
+          "introspectComments": true
+        }
+      }
+    ],
+    "webpack": true,
+    "tsConfigPath": "apps/gateway/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/gateway",
+  "projects": {
+    "gateway": {
+      "type": "application",
+      "root": "apps/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
+      }
+    },
+    "microservice-players": {
+      "type": "application",
+      "root": "apps/microservice-players",
+      "entryFile": "main",
+      "sourceRoot": "apps/microservice-players/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/microservice-players/tsconfig.app.json"
+      }
+    },
+    "microservice-games": {
+      "type": "application",
+      "root": "apps/microservice-games",
+      "entryFile": "main",
+      "sourceRoot": "apps/microservice-games/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/microservice-games/tsconfig.app.json"
+      }
+    },
+    "microservice-auth": {
+      "type": "application",
+      "root": "apps/microservice-auth",
+      "entryFile": "main",
+      "sourceRoot": "apps/microservice-auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/microservice-auth/tsconfig.app.json"
+      }
+    }
+  }
+}

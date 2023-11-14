@@ -1,0 +1,11 @@
+{
+    "recommendations": [
+        "apollographql.vscode-apollo",
+        "EditorConfig.EditorConfig",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-js-profile-flame",
+        "firsttris.vscode-jest-runner",
+        "bradlc.vscode-tailwindcss",
+        "PKief.material-icon-theme"
+    ]
+}

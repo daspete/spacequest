@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+            "name": "Client",
+			"path": "client"
+		},
+		{
+            "name": "Server",
+			"path": "server"
+		},
+		{
+			"name": "Gateway",
+			"path": "server/apps/gateway"
+		},
+        {
+			"name": "Microservice Auth",
+			"path": "server/apps/microservice-auth"
+		},
+		{
+			"name": "Microservice Players",
+			"path": "server/apps/microservice-players"
+		},
+		{
+			"name": "Microservice Games",
+			"path": "server/apps/microservice-games"
+		},
+        {
+			"name": "Rootfolder",
+			"path": "."
+		},
+	],
+	"settings": {
+        "workbench.iconTheme": "material-icon-theme",
+        "typescript.tsdk": "node_modules/typescript/lib"
+	}
+}

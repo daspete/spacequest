@@ -24,11 +24,28 @@ export class User {
     id: string;
 
     @Field()
+    @Prop({ required: true })
+    provider: string;
+
+    @Field()
+    @Prop({ required: true })
+    providerId: string;
+
+    @Field({ nullable: true })
+    firstname: string;
+
+    @Field({ nullable: true })
+    lastname: string;
+
+    @Field({ nullable: true })
+    nickname: string;
+
+    @Field()
     @Prop({ required: true, unique: true })
     email: string;
 
-    @Prop({ required: true })
     @HideField()
+    @Prop({ required: true })
     password: string;
 
     @Field(() => UserStatus)

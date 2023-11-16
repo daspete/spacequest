@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { AuthModule } from './modules/auth/auth.module';
-import { GraphQLModule } from '@nestjs/graphql';
 import {
     ApolloFederationDriver,
     ApolloFederationDriverConfig,
 } from '@nestjs/apollo';
-import { MongooseModule } from '@nestjs/mongoose';
+import { Module } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { UsersModule } from './modules/users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 import config from './config/config';
 
 @Module({
@@ -24,15 +24,13 @@ import config from './config/config';
             }),
             inject: [ConfigService],
         }),
-        // MongooseModule.forRoot(process.env.MONGO_DSN, {
-        //     autoIndex: true,
-        //     autoCreate: true,
-        // }),
         GraphQLModule.forRoot<ApolloFederationDriverConfig>({
             driver: ApolloFederationDriver,
             autoSchemaFile: { federation: 2 },
         }),
-        AuthModule,
+        UsersModule,
     ],
+    controllers: [],
+    providers: [],
 })
 export class AppModule {}

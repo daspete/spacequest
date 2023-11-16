@@ -45,13 +45,13 @@
         "tsConfigPath": "apps/microservice-games/tsconfig.app.json"
       }
     },
-    "microservice-auth": {
+    "microservice-users": {
       "type": "application",
-      "root": "apps/microservice-auth",
+      "root": "apps/microservice-users",
       "entryFile": "main",
-      "sourceRoot": "apps/microservice-auth/src",
+      "sourceRoot": "apps/microservice-users/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/microservice-auth/tsconfig.app.json"
+        "tsConfigPath": "apps/microservice-users/tsconfig.app.json"
       }
     }
   }

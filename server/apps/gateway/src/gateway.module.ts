@@ -3,6 +3,7 @@ import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { GraphQLDataSource } from './datasources/graphql.datasource';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
     imports: [
@@ -18,8 +19,8 @@ import { GraphQLDataSource } from './datasources/graphql.datasource';
                 supergraphSdl: new IntrospectAndCompose({
                     subgraphs: [
                         {
-                            name: 'auth',
-                            url: 'http://microservice-auth:3000/graphql',
+                            name: 'users',
+                            url: 'http://microservice-users:3000/graphql',
                         },
                         {
                             name: 'players',
@@ -34,6 +35,7 @@ import { GraphQLDataSource } from './datasources/graphql.datasource';
                 }),
             },
         }),
+        AuthModule,
     ],
 })
 export class GatewayModule {}

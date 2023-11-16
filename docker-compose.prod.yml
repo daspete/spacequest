@@ -38,11 +38,9 @@ services:
             - spacequestnetwork
 
     gateway:
-        image: node:20
+        build:
+            context: ./server
         hostname: gateway
-        working_dir: /app
-        volumes:
-            - ./server:/app
         env_file:
             - .env
         depends_on:
@@ -51,64 +49,54 @@ services:
             - microservice-users
         networks:
             - spacequestnetwork
-        command: sh -c "exec yarn start:dev gateway"
+        command: gateway
 
     microservice-users:
-        image: node:20
+        build:
+            context: ./server
         hostname: microservice-users
-        working_dir: /app
-        volumes:
-            - ./server:/app
         env_file:
             - .env
         depends_on:
             - db
         networks:
             - spacequestnetwork
-        command: sh -c "exec yarn start:dev microservice-users"
+        command: microservice-users
 
     microservice-players:
-        image: node:20
+        build:
+            context: ./server
         hostname: microservice-players
-        working_dir: /app
-        volumes:
-            - ./server:/app
         env_file:
             - .env
         depends_on:
             - db
         networks:
             - spacequestnetwork
-        command: sh -c "exec yarn start:dev microservice-players"
+        command: microservice-players
 
     microservice-games:
-        image: node:20
+        build:
+            context: ./server
         hostname: microservice-games
-        working_dir: /app
-        volumes:
-            - ./server:/app
         env_file:
             - .env
         depends_on:
             - db
         networks:
             - spacequestnetwork
-        command: sh -c "exec yarn start:dev microservice-games"
+        command: microservice-games
 
     client:
-        image: node:20
+        build:
+            context: ./client
         hostname: client
-        working_dir: /app
-        volumes:
-            - ./client:/app
         env_file:
             - .env
         ports:
             - 3000:3000
-            - 24678:24678
         networks:
             - spacequestnetwork
-        command: sh -c "rm -rf /tmp/nitro/worker-* && exec yarn dev --host=0.0.0.0"
 
 networks:
     spacequestnetwork:

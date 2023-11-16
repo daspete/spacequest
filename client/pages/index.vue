@@ -2,7 +2,8 @@
 // import loginMutation from '../graphql/mutations/login.gql'
 // import logoutMutation from '../graphql/mutations/logout.gql'
 
-// const me = useMe();
+const me = useMe();
+console.log(me.value);
 // const router = useRouter();
 
 
@@ -55,11 +56,11 @@ const isDark = computed({
                 <div>About</div>
                 <div>Contact</div>
             </div>
-            <div>Login</div>
+            <ULink to="https://graph.spacequest.link/auth/google">Login</ULink>
         </div>
 
         <div class="spotlight h-[80vh] overflow-hidden relative">
-            <NuxtPicture class="w-full h-full absolute" fit="cover" src="/assets/images/spotlight.jpg" placeholder :modifiers="{ tint: '#9a3412' }" />
+            <!-- <NuxtPicture class="w-full h-full absolute" fit="cover" src="/assets/images/spotlight.jpg" placeholder :modifiers="{ tint: '#9a3412' }" /> -->
             <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-3 bg-gradient-to-t from-green-500">
                 <div class="font-logo text-4xl font-bold uppercase drop-shadow-md text-center">Welcome commander</div>
                 <UButton size="xl" :ui="{ rounded: 'rounded-full' }" icon="i-fe-gamepad" class="uppercase" trailing>Enter the war</UButton>

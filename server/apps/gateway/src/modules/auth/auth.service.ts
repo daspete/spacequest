@@ -5,12 +5,12 @@ import { firstValueFrom } from 'rxjs';
 import * as bcryptjs from 'bcryptjs';
 import { AuthUser } from './auth-user.entity';
 
-class RegisterUserDto {
+interface RegisterUserDto {
     id: number;
     email: string;
+    firstname: string;
+    lastname: string;
 }
-
-const users = [];
 
 @Injectable()
 export class AuthService {
@@ -43,11 +43,13 @@ export class AuthService {
     }
 
     async registerUser(user: RegisterUserDto) {
-        users.push(user);
+        const newUser = await firstValueFrom<AuthUser>(
+            this.usersClient.send('users.create', user),
+        );
 
         return this.generateJwt({
-            sub: user.id,
-            email: user.email,
+            sub: newUser.id,
+            email: newUser.email,
         });
     }
 
@@ -67,6 +69,8 @@ export class AuthService {
         if (!userExists) {
             return null;
         }
+
+        if (userExists.provider !== 'local') return null;
 
         const hasValidPassword = await bcryptjs.compare(
             userExists.password,

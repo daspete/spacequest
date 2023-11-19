@@ -1,9 +1,18 @@
 <script setup lang="ts">
 const { $config } = useNuxtApp();
+const $router = useRouter();
 
 const me = useMe();
 
 const isLoginModalOpen = ref(false)
+
+const enterWar = () => {
+    if(!me.value) {
+        isLoginModalOpen.value = true
+    } else {
+        $router.push('/game')
+    }
+}
 </script>
 
 <template>
@@ -28,7 +37,7 @@ const isLoginModalOpen = ref(false)
             <div
                 class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-3 bg-gradient-to-t from-green-500">
                 <div class="font-logo text-4xl font-bold uppercase drop-shadow-md text-center">Welcome {{ me ? me.firstname : 'commander' }}</div>
-                <UButton size="xl" :ui="{ rounded: 'rounded-full' }" icon="i-fe-gamepad" class="uppercase" trailing>Enter
+                <UButton size="xl" :ui="{ rounded: 'rounded-full' }" icon="i-fe-gamepad" class="uppercase" trailing @click="enterWar">Enter
                     the war</UButton>
             </div>
         </div>

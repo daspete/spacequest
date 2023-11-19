@@ -32,13 +32,16 @@ export class User {
     providerId: string;
 
     @Field({ nullable: true })
-    firstname: string;
+    @Prop({ nullable: true })
+    firstname?: string;
 
     @Field({ nullable: true })
-    lastname: string;
+    @Prop({ nullable: true })
+    lastname?: string;
 
     @Field({ nullable: true })
-    nickname: string;
+    @Prop({ nullable: true })
+    nickname?: string;
 
     @Field()
     @Prop({ required: true, unique: true })

@@ -1,28 +1,15 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ClientProxy } from '@nestjs/microservices';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { firstValueFrom } from 'rxjs';
-
-export type JwtPayload = {
-    sub: string;
-    email: string;
-};
-
-export type AuthUser = {
-    _id: string;
-    email: string;
-    provider: string;
-    providerId: string;
-    password: string;
-}
+import { AuthService } from '../auth.service';
+import { JwtPayload } from '../jwt-payload.entity';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     constructor(
-        private configService: ConfigService,
-        @Inject('USERS_SERVICE') private readonly usersClient: ClientProxy,
+        private readonly configService: ConfigService,
+        private readonly authService: AuthService,
     ) {
         const extractJwtFromCookie = (req) => {
             let token = null;
@@ -43,19 +30,11 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     }
 
     async validate(payload: JwtPayload) {
-        const user = await firstValueFrom<AuthUser>(
-            this.usersClient.send('user.findByEmail', payload.email),
-        );
+        const user = await this.authService.validateJwtPayload(payload);
 
-        if(!user) {
+        if (!user) {
             throw new UnauthorizedException();
         }
-
-        if(user._id !== payload.sub) {
-            throw new UnauthorizedException();
-        }
-
-        const { password: _, ...result } = user;
 
         return user;
     }

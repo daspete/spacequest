@@ -1,5 +1,8 @@
 query me {
     me {
         id
+        firstname
+        lastname
+        email
     }
 }

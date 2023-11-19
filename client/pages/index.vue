@@ -1,46 +1,8 @@
 <script setup lang="ts">
-// import loginMutation from '../graphql/mutations/login.gql'
-// import logoutMutation from '../graphql/mutations/logout.gql'
-
 const me = useMe();
-console.log(me.value);
-// const router = useRouter();
+const { $config } = useNuxtApp();
 
-
-// const login = async () => {
-//     const { mutate } = useMutation(loginMutation, {
-//         variables: {
-//             data: {
-//                 email: 'daspetemail@gmail.com',
-//                 password: '123456'
-//             }
-//         }
-//     });
-
-//     await mutate();
-
-//     window.location.reload();
-// };
-
-// const logout = async () => {
-//     const { mutate } = useMutation(logoutMutation);
-
-//     await mutate();
-
-//     window.location.reload();
-// };
-const colorMode = useColorMode();
-colorMode.value = 'dark';
-
-const isDark = computed({
-    get() {
-        return colorMode.value === 'dark';
-    },
-    set() {
-        colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark';
-    }
-})
-
+const isLoginModalOpen = ref(false)
 </script>
 
 <template>
@@ -56,14 +18,17 @@ const isDark = computed({
                 <div>About</div>
                 <div>Contact</div>
             </div>
-            <ULink to="https://graph.spacequest.link/auth/google">Login</ULink>
+            <UButton v-if="!me" variant="link" size="xl" color="white" label="Login" @click="isLoginModalOpen = true" />
+            <UButton v-if="me" variant="link" size="xl" color="white" label="Logout" :to="$config.public.logoutUrl" />
         </div>
 
         <div class="spotlight h-[80vh] overflow-hidden relative">
-            <!-- <NuxtPicture class="w-full h-full absolute" fit="cover" src="/assets/images/spotlight.jpg" placeholder :modifiers="{ tint: '#9a3412' }" /> -->
-            <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-3 bg-gradient-to-t from-green-500">
+            <NuxtPicture class="w-full h-full absolute" fit="cover" src="/assets/images/spotlight.jpg" placeholder />
+            <div
+                class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-3 bg-gradient-to-t from-green-500">
                 <div class="font-logo text-4xl font-bold uppercase drop-shadow-md text-center">Welcome commander</div>
-                <UButton size="xl" :ui="{ rounded: 'rounded-full' }" icon="i-fe-gamepad" class="uppercase" trailing>Enter the war</UButton>
+                <UButton size="xl" :ui="{ rounded: 'rounded-full' }" icon="i-fe-gamepad" class="uppercase" trailing>Enter
+                    the war</UButton>
             </div>
         </div>
 
@@ -74,7 +39,8 @@ const isDark = computed({
                     <div class="flex flex-col items-center gap-8">
                         <UIcon name="i-game-icons-exploding-planet" class="text-6xl text-center" />
                         <div>
-                            Prepare for the ultimate defense! As a guardian of Earth, your mission is hold back the invading creeps.
+                            Prepare for the ultimate defense! As a guardian of Earth, your mission is hold back the invading
+                            creeps.
                         </div>
                     </div>
 
@@ -88,7 +54,8 @@ const isDark = computed({
                     <div class="flex flex-col items-center gap-8">
                         <UIcon name="i-game-icons-shield-impact" class="text-6xl text-center" />
                         <div>
-                            Command your defenses, stop the invasion and protect our planet in this thrilling tower defense experience.
+                            Command your defenses, stop the invasion and protect our planet in this thrilling tower defense
+                            experience.
                         </div>
                     </div>
                 </div>
@@ -96,6 +63,15 @@ const isDark = computed({
 
             </div>
         </div>
+
+        <UModal v-model="isLoginModalOpen">
+            <div class="p-4 flex flex-col gap-4 justify-center">
+                <LoginForm />
+                <UDivider label="OR" />
+                <UButton icon="i-fa6-brands-google" :to="$config.public.googleLoginUrl">Sign in with Google
+                </UButton>
+            </div>
+        </UModal>
     </div>
 </template>
 
@@ -104,6 +80,7 @@ const isDark = computed({
     picture {
         @apply block;
     }
+
     img {
         @apply block;
         @apply w-full h-full;

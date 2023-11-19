@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import * as cookieParser from 'cookie-parser';
 import * as waitOn from 'wait-on';
 import { GatewayModule } from './gateway.module';
+import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
     await waitOn({
@@ -22,7 +23,19 @@ async function bootstrap() {
             credentials: true,
         },
     });
+
     app.use(cookieParser());
+
+    app.connectMicroservice({
+        transport: Transport.TCP,
+        options: {
+            host: '0.0.0.0',
+            port: 3001,
+        },
+    });
+
+    await app.startAllMicroservices();
+
     await app.listen(3000);
 }
 bootstrap();

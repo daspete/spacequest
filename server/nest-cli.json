@@ -53,6 +53,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/microservice-users/tsconfig.app.json"
       }
+    },
+    "remote-auth": {
+      "type": "library",
+      "root": "libs/remote-auth",
+      "entryFile": "index",
+      "sourceRoot": "libs/remote-auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/remote-auth/tsconfig.lib.json"
+      }
     }
   }
 }

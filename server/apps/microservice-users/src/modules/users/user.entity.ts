@@ -18,7 +18,7 @@ registerEnumType(UserStatus, {
 });
 
 @ObjectType()
-@Schema({ timestamps: true, collection: 'users' })
+@Schema({ timestamps: true, collection: 'users', toJSON: { virtuals: true } })
 export class User {
     @Field(() => ID)
     id: string;

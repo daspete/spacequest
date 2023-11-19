@@ -10,4 +10,7 @@ export default () => ({
     client: {
         url: process.env.CLIENT_URL,
     },
+    logout: {
+        callbackUrl: process.env.LOGOUT_CALLBACK_URL,
+    },
 });

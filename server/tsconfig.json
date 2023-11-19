@@ -24,6 +24,12 @@
       ],
       "@app/appconfig/*": [
         "libs/appconfig/src/*"
+      ],
+      "@app/remote-auth": [
+        "libs/remote-auth/src"
+      ],
+      "@app/remote-auth/*": [
+        "libs/remote-auth/src/*"
       ]
     }
   }

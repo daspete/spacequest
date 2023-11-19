@@ -1,6 +1,7 @@
 <script setup lang="ts">
-const me = useMe();
 const { $config } = useNuxtApp();
+
+const me = useMe();
 
 const isLoginModalOpen = ref(false)
 </script>
@@ -26,7 +27,7 @@ const isLoginModalOpen = ref(false)
             <NuxtPicture class="w-full h-full absolute" fit="cover" src="/assets/images/spotlight.jpg" placeholder />
             <div
                 class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center gap-3 bg-gradient-to-t from-green-500">
-                <div class="font-logo text-4xl font-bold uppercase drop-shadow-md text-center">Welcome commander</div>
+                <div class="font-logo text-4xl font-bold uppercase drop-shadow-md text-center">Welcome {{ me ? me.firstname : 'commander' }}</div>
                 <UButton size="xl" :ui="{ rounded: 'rounded-full' }" icon="i-fe-gamepad" class="uppercase" trailing>Enter
                     the war</UButton>
             </div>

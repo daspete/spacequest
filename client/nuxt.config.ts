@@ -13,6 +13,7 @@ export default defineNuxtConfig({
         public: {
             apiUrl: process.env.API_URL,
             googleLoginUrl: process.env.GOOGLE_LOGIN_URL,
+            loginUrl: process.env.LOGIN_URL,
             logoutUrl: process.env.LOGOUT_URL,
         },
     },

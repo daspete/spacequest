@@ -23,7 +23,7 @@ export class AuthController {
             secure: true,
         });
 
-        return res.json(true);
+        return res.redirect(this.configService.get<string>('client.url'));
     }
 
     @Get('logout')

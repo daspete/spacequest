@@ -14,30 +14,11 @@ const validate = (state: any): FormError[] => {
     if (!state.password) errors.push({ path: 'password', message: 'Required' })
     return errors
 }
-
-async function onSubmit(event: FormSubmitEvent<any>) {
-    try {
-        const res = await $fetch('/auth/login', {
-            method: 'POST',
-            baseURL: $config.public.apiUrl,
-            headers: {
-                credentials: 'include',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(event.data)
-        })
-
-        console.log(res)
-    } catch (err) {
-        console.log(err)
-    }
-
-}
 </script>
 
 <template>
     <div>
-        <UForm :validate="validate" :state="state" class="flex flex-col gap-4" @submit="onSubmit">
+        <form class="flex flex-col gap-4" :action="$config.public.loginUrl" method="post">
             <UFormGroup label="Email" name="email" required>
                 <UInput v-model="state.email" />
             </UFormGroup>
@@ -51,7 +32,6 @@ async function onSubmit(event: FormSubmitEvent<any>) {
                     Login
                 </UButton>
             </div>
-
-        </UForm>
+        </form>
     </div>
 </template>

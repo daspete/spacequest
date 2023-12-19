@@ -3,9 +3,6 @@ export default defineNuxtConfig({
     devtools: { enabled: true },
     ssr: false,
     modules: ["@nuxt/ui", "@nuxt/image", "@nuxtjs/apollo"],
-    ui: {
-        icons: ["mdi", "fe", "game-icons", "fa6-brands"],
-    },
     build: {
         transpile: ["tslib"],
     },
@@ -17,6 +14,12 @@ export default defineNuxtConfig({
             logoutUrl: process.env.LOGOUT_URL,
         },
     },
+    app: {
+        pageTransition: { name: "page", mode: "out-in" },
+    },
+    ui: {
+        icons: ["mdi", "fe", "game-icons", "fa6-brands"],
+    },
     image: {
         provider: "twicpics",
         twicpics: {
@@ -27,6 +30,7 @@ export default defineNuxtConfig({
         clients: {
             default: {
                 httpEndpoint: "https://graph.spacequest.link/graphql",
+                tokenName: "access_token",
                 httpLinkOptions: {
                     credentials: "include",
                 },
